@@ -1,3 +1,4 @@
+![logo](ouroboros.png)
 # self
 ### Ouroboros metacircular programming language implementation
 
