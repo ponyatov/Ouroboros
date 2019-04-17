@@ -1,3 +1,14 @@
-\ FORTH/py metaprogramming
+module: self													`MODULE  !
+'Ouroboros metacircular programming language implementation'	`TITLE   !
+'Dmitry Ponyatov <<dponyatov@gmail.com>>'						`AUTHOR  !
+'CC BY-NC-ND'													`LICENSE !
+'https://github.com/ponyatov/Ouroboros'							`GITHUB  !
 
-module: self
+`README.md											   FILE dup `README  !
+	'# '   MODULE +					<<
+	'### ' TITLE  +					<<
+	''								<<
+	'(c) ' AUTHOR + ' ' + LICENSE + <<
+	''								<<
+	'github: ' GITHUB +				<<
+>src

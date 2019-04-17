@@ -11,7 +11,9 @@ class Frame:
     def __repr__(self):
         return self.dump()
     def head(self,prefix=''):
-        return '%s<%s:%s> @%x' % (prefix, self.type, self.value, id(self))
+        return '%s<%s:%s> @%x' % (prefix, self.type, self.str(), id(self))
+    def str(self):
+        return str(self.value)
     def pad(self,N):
         return '\n' + '\t'*N
     def dump(self,depth=0,prefix=''):
@@ -29,34 +31,55 @@ class Frame:
     
     def push(self,obj): self.nest.append(obj) ; return self
     def pop(self): return self.nest.pop()
+    def top(self): return self.nest[-1]
+    def dup(self): return self.push(self.top())
+    def dropall(self): self.nest = []
     
     def execute(self): S << self
     
+    def src(self): return self.value
+    
 class Symbol(Frame): pass
 
-class String(Frame): pass
+class String(Frame):
+    def str(self):
+        T = ''
+        for c in self.value:
+            if c == '\n': T += '\\n'
+            elif c == '\t': T += '\\t'
+            else: T += c
+        return T
+    def add(self,obj):
+        return String(self.value + obj.value)
 
 class Stack(Frame): pass
 
-class Dict(Frame): pass
+class Dict(Frame):
+    def __lshift__(self,obj):
+        if callable(obj): self[obj.__name__] = CMD(obj) ; return self
+        else: return Frame.__lshift__(self, obj)
 
 class Active(Frame): pass
 
 class CMD(Active):
     def __init__(self,F): Active.__init__(self,F.__name__) ; self.fn = F
     def execute(self): self.fn()
-
+    
 ######################################################################## parser
 
 import ply.lex as lex
 
-tokens = ['symbol']
+tokens = ['symbol','string']
 
 t_ignore = ' \t\r\n'
 t_ignore_COMMENT = r'[\\\#].*'
 
+def t_string(t):
+    r'\'.*?\''
+    return String(t.value[1:-1])
+
 def t_symbol(t):
-    r'[a-zA-Z0-9_:]+'
+    r'`|[a-zA-Z0-9_:;@!.,<>+\-*/^]+'
     return Symbol(t.value)
 
 def t_error(t): raise SyntaxError(t)
@@ -73,6 +96,24 @@ S = Stack('DATA')
 
 W['S'] = S
 
+def DUP(): S.dup()
+W << DUP
+
+def DROPALL(): S.dropall()
+W['.'] = CMD(DROPALL)
+
+def ST(): idx = S.pop().value ; W[idx] = S.pop()
+W['!'] = CMD(ST)
+
+def PUSH(): B = S.pop() ; S.top() << B
+W['<<'] = CMD(PUSH)
+
+def ADD(): B = S.pop() ; A = S.pop() ; S << A.add(B)
+W['+'] = CMD(ADD)
+
+def QUOTE(): WORD()
+W['`'] = CMD(QUOTE)
+
 def WORD():
     token = lexer.token()
     if token: S << token
@@ -80,10 +121,10 @@ def WORD():
 
 def FIND():
     token = S.pop()
-    try:
-        S << W[token.value] ; return True
+    try: S << W[token.value] ; return True
     except KeyError:
-        S << token ; return False
+        try: S << W[token.value.upper()] ; return True
+        except KeyError: S << token ; return False
 
 def EXECUTE(): S.pop().execute()
 
@@ -91,8 +132,9 @@ def INTERPRET():
     lexer.input(S.pop().value)
     while True:
         if not WORD(): break
-        if not FIND(): raise SyntaxError(S.pop()) 
-        EXECUTE()
+        if isinstance(S.top(), Symbol):
+            if not FIND(): raise SyntaxError(S.pop()) 
+            EXECUTE()
         print W
         
 ########################################################################## META
@@ -104,6 +146,19 @@ class Module(Meta): pass
 def MODULE(): WORD() ; S << Module(S.pop().value)
 
 W['module:'] = CMD(MODULE)
+
+class File(Meta):
+    def src(self):
+        T  = '===== %s =====\n' % self.head()
+        for i in self.nest: T += i.src() + '\n'
+        T += '==============\n'
+        return T
+
+def FILE(): S << File(S.pop().value)
+W << FILE
+
+def SRC(): print S.pop().src()
+W['>src'] = CMD(SRC)
 
 ########################################################################## INIT
 
