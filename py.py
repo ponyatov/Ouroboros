@@ -1,3 +1,4 @@
+import os,sys
 
 ################################################################# frame system
 
@@ -79,7 +80,7 @@ def t_string(t):
     return String(t.value[1:-1])
 
 def t_symbol(t):
-    r'`|[a-zA-Z0-9_:;@!.,<>+\-*/^]+'
+    r'`|[a-zA-Z0-9_:;@!.,<>+\-*/^?]+'
     return Symbol(t.value)
 
 def t_error(t): raise SyntaxError(t)
@@ -101,6 +102,15 @@ W << DUP
 
 def DROPALL(): S.dropall()
 W['.'] = CMD(DROPALL)
+
+def BYE(): sys.exit(0)
+W << BYE
+
+def Q(): print S
+W['?'] = CMD(Q)
+
+def QQ(): print W ; BYE()
+W['??'] = CMD(QQ)
 
 def ST(): idx = S.pop().value ; W[idx] = S.pop()
 W['!'] = CMD(ST)
@@ -135,7 +145,6 @@ def INTERPRET():
         if isinstance(S.top(), Symbol):
             if not FIND(): raise SyntaxError(S.pop()) 
             EXECUTE()
-        print W
         
 ########################################################################## META
 

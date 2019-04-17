@@ -13,4 +13,8 @@ module: self													`MODULE  !
 	'(c) ' AUTHOR + ' ' + LICENSE + <<
 	''								<<
 	'github: ' GITHUB +				<<
->src .
+>src ? .
+
+??
+
+any blablabla
