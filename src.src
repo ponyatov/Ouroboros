@@ -6,11 +6,10 @@ module: self													`MODULE  !
 'ouroboros.png'													`LOGO	 !
 
 `README.md											   FILE dup `README  !
-	'![logo](' LOGO + ')' +			<<
-	'# '   MODULE +					<<
-	'### ' TITLE  +					<<
-	''								<<
-	'(c) ' AUTHOR + ' ' + LICENSE + <<
-	''								<<
-	'github: ' GITHUB +				<<
+	'![logo](' LOGO + ') # ' + MODULE +	<<
+	'### ' TITLE  +						<<
+	''									<<
+	'(c) ' AUTHOR + ' ' + LICENSE + 	<<
+	''									<<
+	'github: ' GITHUB +					<<
 >src .
