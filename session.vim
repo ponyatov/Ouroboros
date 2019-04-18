@@ -36,9 +36,9 @@ vmap ]% ]%m'gv``
 vmap a% [%v]%
 vmap gx <Plug>NetrwBrowseXVis
 nmap gx <Plug>NetrwBrowseX
-nmap <S-Insert> "+gP
-nnoremap <C-Tab> w
 nnoremap <C-F4> c
+nnoremap <C-Tab> w
+nmap <S-Insert> "+gP
 vnoremap <silent> <Plug>NetrwBrowseXVis :call netrw#BrowseXVis()
 nnoremap <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())
 nnoremap <F12> :w:!make OS=win32 RES=res.res EXE=.exe TAIL=-n17
@@ -69,6 +69,7 @@ noremap   :simalt ~
 let &cpo=s:cpo_save
 unlet s:cpo_save
 set autoread
+set background=dark
 set backspace=indent,eol,start
 set backup
 set diffexpr=MyDiff()
@@ -96,7 +97,7 @@ set undofile
 set whichwrap=b,s,<,>,[,]
 set wildignore=*.pyc
 set wildmenu
-set window=35
+set window=32
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
@@ -107,7 +108,7 @@ endif
 set shortmess=aoO
 badd +1 log.log
 badd +1 src.src
-badd +10 py.py
+badd +76 py.py
 argglobal
 silent! argdel *
 $argadd log.log
@@ -127,11 +128,11 @@ set nosplitbelow
 set nosplitright
 wincmd t
 set winminheight=1 winheight=1 winminwidth=1 winwidth=1
-exe '1resize ' . ((&lines * 20 + 18) / 36)
-exe 'vert 1resize ' . ((&columns * 83 + 97) / 195)
-exe '2resize ' . ((&lines * 13 + 18) / 36)
-exe 'vert 2resize ' . ((&columns * 83 + 97) / 195)
-exe 'vert 3resize ' . ((&columns * 111 + 97) / 195)
+exe '1resize ' . ((&lines * 18 + 16) / 33)
+exe 'vert 1resize ' . ((&columns * 83 + 95) / 191)
+exe '2resize ' . ((&lines * 12 + 16) / 33)
+exe 'vert 2resize ' . ((&columns * 83 + 95) / 191)
+exe 'vert 3resize ' . ((&columns * 107 + 95) / 191)
 argglobal
 if bufexists('py.py') | buffer py.py | else | edit py.py | endif
 setlocal keymap=
@@ -249,12 +250,12 @@ set nowrap
 setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 10 - ((7 * winheight(0) + 10) / 20)
+let s:l = 24 - ((11 * winheight(0) + 9) / 18)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-10
-normal! 0
+24
+normal! 015|
 wincmd w
 argglobal
 if bufexists('src.src') | buffer src.src | else | edit src.src | endif
@@ -291,8 +292,8 @@ setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal noexpandtab
-if &filetype != ''
-setlocal filetype=
+if &filetype != 'metaL'
+setlocal filetype=metaL
 endif
 setlocal fixendofline
 setlocal foldcolumn=0
@@ -354,8 +355,8 @@ setlocal statusline=
 setlocal suffixesadd=
 setlocal swapfile
 setlocal synmaxcol=3000
-if &syntax != ''
-setlocal syntax=
+if &syntax != 'metaL'
+setlocal syntax=metaL
 endif
 setlocal tabstop=4
 setlocal tagcase=
@@ -373,12 +374,12 @@ set nowrap
 setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 26 - ((5 * winheight(0) + 6) / 13)
+let s:l = 7 - ((6 * winheight(0) + 6) / 12)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-26
-normal! 0
+7
+normal! 044|
 wincmd w
 argglobal
 if bufexists('log.log') | buffer log.log | else | edit log.log | endif
@@ -497,19 +498,19 @@ set nowrap
 setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 51 - ((25 * winheight(0) + 17) / 34)
+let s:l = 31 - ((25 * winheight(0) + 15) / 31)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-51
-normal! 022|
+31
+normal! 028|
 wincmd w
-2wincmd w
-exe '1resize ' . ((&lines * 20 + 18) / 36)
-exe 'vert 1resize ' . ((&columns * 83 + 97) / 195)
-exe '2resize ' . ((&lines * 13 + 18) / 36)
-exe 'vert 2resize ' . ((&columns * 83 + 97) / 195)
-exe 'vert 3resize ' . ((&columns * 111 + 97) / 195)
+3wincmd w
+exe '1resize ' . ((&lines * 18 + 16) / 33)
+exe 'vert 1resize ' . ((&columns * 83 + 95) / 191)
+exe '2resize ' . ((&lines * 12 + 16) / 33)
+exe 'vert 2resize ' . ((&columns * 83 + 95) / 191)
+exe 'vert 3resize ' . ((&columns * 107 + 95) / 191)
 tabnext 1
 if exists('s:wipebuf') && s:wipebuf != bufnr('%')
   silent exe 'bwipe ' . s:wipebuf

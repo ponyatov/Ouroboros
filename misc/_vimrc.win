@@ -25,6 +25,7 @@ au BufNewFile,BufRead *.cpp set filetype=cpp
 au BufNewFile,BufRead *.log set filetype=log
 au BufNewFile,BufRead *.log set autoread
 au BufNewFile,BufRead *.log set nowrap
+au BufNewFile,BufRead *.src source metaL.vim
 
 au BufNewFile,BufRead *.py imap <F11> <ESC>:w<CR>:!python %<CR>
 au BufNewFile,BufRead *.py set expandtab

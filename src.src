@@ -1,3 +1,6 @@
+\ metaL
+# metacircular implementation
+
 module: self													`MODULE  !
 'Ouroboros metacircular programming language implementation'	`TITLE   !
 'Dmitry Ponyatov <<dponyatov@gmail.com>>'						`AUTHOR  !
