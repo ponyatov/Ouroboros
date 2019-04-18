@@ -75,15 +75,32 @@ tokens = ['symbol','string']
 t_ignore = ' \t\r\n'
 t_ignore_COMMENT = r'[\\\#].*'
 
+states = (('str','exclusive'),)
+t_str_ignore = ''
+
 def t_string(t):
-    r'\'.*?\''
-    return String(t.value[1:-1])
+    r'\''
+    t.lexer.lexstring=''
+    t.lexer.push_state('str')
+def t_str_string(t):
+    r'\''
+    t.lexer.pop_state()
+    return String(t.lexer.lexstring)
+def t_str_lf(t):
+    r'\\n'
+    t.lexer.lexstring += '\n'
+def t_str_tab(t):
+    r'\\t'
+    t.lexer.lexstring += '\t'
+def t_str_char(t):
+    r'.'
+    t.lexer.lexstring += t.value
 
 def t_symbol(t):
     r'`|[a-zA-Z0-9_:;@!.,<>+\-*/^?]+'
     return Symbol(t.value)
 
-def t_error(t): raise SyntaxError(t)
+def t_ANY_error(t): raise SyntaxError(t)
 
 lexer = lex.lex()
 
