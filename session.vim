@@ -2,7 +2,8 @@ let SessionLoad = 1
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
-imap <F11> :w:!python %
+imap <F10> :w:!python %
+inoremap <F11> :w:call system('make')
 inoremap <F12> :w:!make OS=win32 RES=res.res EXE=.exe TAIL=-n17
 cnoremap <C-F4> c
 inoremap <C-F4> c
@@ -18,8 +19,8 @@ vnoremap  "+y
 noremap <expr>  has("gui_running") ? ":promptfind\" : "/"
 nnoremap <expr>  has("gui_running") ? ":promptrepl\" : "\"
 noremap  
-nnoremap  :update
 vnoremap  :update
+nnoremap  :update
 onoremap  :update
 nnoremap  :tabf 
 nmap  "+gP
@@ -36,22 +37,23 @@ vmap ]% ]%m'gv``
 vmap a% [%v]%
 vmap gx <Plug>NetrwBrowseXVis
 nmap gx <Plug>NetrwBrowseX
+onoremap <C-F4> c
+onoremap <C-Tab> w
+vmap <S-Insert> 
 nnoremap <C-F4> c
+vnoremap <C-F4> c
 nnoremap <C-Tab> w
+vnoremap <C-Tab> w
 nmap <S-Insert> "+gP
+omap <S-Insert> "+gP
 vnoremap <silent> <Plug>NetrwBrowseXVis :call netrw#BrowseXVis()
 nnoremap <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())
+nnoremap <F11> :w:call system('make')
 nnoremap <F12> :w:!make OS=win32 RES=res.res EXE=.exe TAIL=-n17
-onoremap <C-F4> c
-vnoremap <C-F4> c
-onoremap <C-Tab> w
-vnoremap <C-Tab> w
-vmap <S-Insert> 
 vnoremap <BS> d
 vmap <C-Del> "*d
 vnoremap <S-Del> "+x
 vnoremap <C-Insert> "+y
-omap <S-Insert> "+gP
 cnoremap  gggHG
 inoremap  gggHG
 cnoremap <expr>  has("gui_running") ? "\\:promptfind\" : "\\/"
@@ -69,12 +71,10 @@ noremap   :simalt ~
 let &cpo=s:cpo_save
 unlet s:cpo_save
 set autoread
-set background=dark
 set backspace=indent,eol,start
 set backup
 set diffexpr=MyDiff()
 set display=truncate
-set expandtab
 set guioptions=egmrLT
 set helplang=ru
 set history=200
@@ -97,7 +97,7 @@ set undofile
 set whichwrap=b,s,<,>,[,]
 set wildignore=*.pyc
 set wildmenu
-set window=32
+set window=34
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
@@ -108,7 +108,7 @@ endif
 set shortmess=aoO
 badd +1 log.log
 badd +1 src.src
-badd +76 py.py
+badd +24 py.py
 argglobal
 silent! argdel *
 $argadd log.log
@@ -128,11 +128,11 @@ set nosplitbelow
 set nosplitright
 wincmd t
 set winminheight=1 winheight=1 winminwidth=1 winwidth=1
-exe '1resize ' . ((&lines * 18 + 16) / 33)
-exe 'vert 1resize ' . ((&columns * 83 + 95) / 191)
-exe '2resize ' . ((&lines * 12 + 16) / 33)
-exe 'vert 2resize ' . ((&columns * 83 + 95) / 191)
-exe 'vert 3resize ' . ((&columns * 107 + 95) / 191)
+exe '1resize ' . ((&lines * 18 + 17) / 35)
+exe 'vert 1resize ' . ((&columns * 85 + 103) / 206)
+exe '2resize ' . ((&lines * 14 + 17) / 35)
+exe 'vert 2resize ' . ((&columns * 85 + 103) / 206)
+exe 'vert 3resize ' . ((&columns * 120 + 103) / 206)
 argglobal
 if bufexists('py.py') | buffer py.py | else | edit py.py | endif
 setlocal keymap=
@@ -374,12 +374,12 @@ set nowrap
 setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 7 - ((6 * winheight(0) + 6) / 12)
+let s:l = 1 - ((0 * winheight(0) + 7) / 14)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-7
-normal! 044|
+1
+normal! 0
 wincmd w
 argglobal
 if bufexists('log.log') | buffer log.log | else | edit log.log | endif
@@ -498,19 +498,19 @@ set nowrap
 setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 31 - ((25 * winheight(0) + 15) / 31)
+let s:l = 19 - ((18 * winheight(0) + 16) / 33)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-31
-normal! 028|
+19
+normal! 0
 wincmd w
-3wincmd w
-exe '1resize ' . ((&lines * 18 + 16) / 33)
-exe 'vert 1resize ' . ((&columns * 83 + 95) / 191)
-exe '2resize ' . ((&lines * 12 + 16) / 33)
-exe 'vert 2resize ' . ((&columns * 83 + 95) / 191)
-exe 'vert 3resize ' . ((&columns * 107 + 95) / 191)
+2wincmd w
+exe '1resize ' . ((&lines * 18 + 17) / 35)
+exe 'vert 1resize ' . ((&columns * 85 + 103) / 206)
+exe '2resize ' . ((&lines * 14 + 17) / 35)
+exe 'vert 2resize ' . ((&columns * 85 + 103) / 206)
+exe 'vert 3resize ' . ((&columns * 120 + 103) / 206)
 tabnext 1
 if exists('s:wipebuf') && s:wipebuf != bufnr('%')
   silent exe 'bwipe ' . s:wipebuf

@@ -15,6 +15,9 @@ inoremap <c-w> <ESC>ZZ
 nnoremap <F12>      :w<CR>:!make OS=win32 RES=res.res EXE=.exe TAIL=-n17<CR>
 inoremap <F12> <ESC>:w<CR>:!make OS=win32 RES=res.res EXE=.exe TAIL=-n17<CR>
 
+nnoremap <F11>		:w<CR>:call system('make')<CR>
+inoremap <F11> <ESC>:w<CR>:call system('make')<CR><INS>
+
 au BufNewFile,BufRead *.ypp set filetype=yacc
 au BufNewFile,BufRead *.yacc set filetype=yacc
 au BufNewFile,BufRead *.lpp set filetype=lex
@@ -27,6 +30,6 @@ au BufNewFile,BufRead *.log set autoread
 au BufNewFile,BufRead *.log set nowrap
 au BufNewFile,BufRead *.src source metaL.vim
 
-au BufNewFile,BufRead *.py imap <F11> <ESC>:w<CR>:!python %<CR>
+au BufNewFile,BufRead *.py imap <F10> <ESC>:w<CR>:!python %<CR>
 au BufNewFile,BufRead *.py set expandtab
 
