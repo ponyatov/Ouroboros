@@ -186,6 +186,11 @@ W << FILE
 def SRC(): print S.pop().src()
 W['>src'] = CMD(SRC)
 
+class Section(Meta): pass
+
+def SECTION(): WORD() ; S << Section(S.pop().value)
+W['section:'] = CMD(SECTION)
+
 ########################################################################## INIT
 
 if __name__ == '__main__':

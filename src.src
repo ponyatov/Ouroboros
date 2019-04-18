@@ -30,6 +30,21 @@ module: self													`MODULE  !
 `log.log												FILE	 `LOG	 !
 `src.src												FILE	 `SRC	 !
 
+`py.py													FILE 	 `PY	 !
+
+PY
+	section: import
+		module: os	<<
+		module: sys	<<
+	<<
+
+	section: FRAMES <<
+	section: PLY 	<<
+	section: FORTH	<<
+	section: META	<<
+	section: INIT	<<
+?? .
+
 W ??
 
 any blablabla
