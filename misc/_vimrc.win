@@ -26,9 +26,6 @@ au BufNewFile,BufRead *.log set filetype=log
 au BufNewFile,BufRead *.log set autoread
 au BufNewFile,BufRead *.log set nowrap
 
-au BufNewFile,BufRead log.log set columns=177
-au BufNewFile,BufRead log.log vsp src.src
-
 au BufNewFile,BufRead *.py imap <F11> <ESC>:w<CR>:!python %<CR>
 au BufNewFile,BufRead *.py set expandtab
 
