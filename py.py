@@ -126,7 +126,7 @@ W << BYE
 def Q(): print S
 W['?'] = CMD(Q)
 
-def QQ(): print W ; BYE()
+def QQ(): Q() ; BYE()
 W['??'] = CMD(QQ)
 
 def ST(): idx = S.pop().value ; W[idx] = S.pop()

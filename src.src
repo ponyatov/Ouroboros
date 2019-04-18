@@ -24,6 +24,9 @@ module: self													`MODULE  !
 	'@gvim -p log.log src.src py.py' <<
 >src .
 
-??
+`log.log												FILE	 `LOG	 !
+`src.src												FILE	 `SRC	 !
+
+W ??
 
 any blablabla
