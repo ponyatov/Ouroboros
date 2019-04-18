@@ -177,7 +177,7 @@ class File(Meta):
     def src(self):
         T  = '===== %s =====\n' % self.head()
         for i in self.nest: T += i.src() + '\n'
-        T += '==============\n'
+        T += '='*40+'\n'
         return T
 
 def FILE(): S << File(S.pop().value)

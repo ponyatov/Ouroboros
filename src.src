@@ -20,6 +20,10 @@ module: self													`MODULE  !
 	'\tpython py.py $< > $@'		<<
 >src .
 
+`bat.bat												FILE dup `BAT	 !
+	'@gvim -p log.log src.src py.py' <<
+>src .
+
 ??
 
 any blablabla
