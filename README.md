@@ -1,6 +1,6 @@
 ![logo](ouroboros.png)
 # Ouroboros
-### metacircular programming language implementation
+### metaL programming language (metacircular implementation)
 
 (c) Dmitry Ponyatov <<dponyatov@gmail.com>> CC BY-NC-ND
 

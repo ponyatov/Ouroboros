@@ -162,6 +162,12 @@ def INTERPRET():
         if isinstance(S.top(), Symbol):
             if not FIND(): raise SyntaxError(S.pop()) 
             EXECUTE()
+
+def REPL():
+    while True:
+        S << String(raw_input('ok> '))
+        INTERPRET()
+W << REPL
         
 ########################################################################## META
 
@@ -194,5 +200,7 @@ W['section:'] = CMD(SECTION)
 ########################################################################## INIT
 
 if __name__ == '__main__':
-    S << String(open('src.src').read())
-    INTERPRET()
+    for src in sys.argv[1:]:
+        S << String(open(src).read())
+        INTERPRET()
+    REPL()

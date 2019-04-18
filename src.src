@@ -1,8 +1,8 @@
-\ metaL
-# metacircular implementation
+\ metamodel: metaL language 
+# (metacircular implementation)
 
 module: Ouroboros												`MODULE  !
-'metacircular programming language implementation'				`TITLE   !
+'metaL programming language (metacircular implementation)'		`TITLE   !
 'Dmitry Ponyatov <<dponyatov@gmail.com>>'						`AUTHOR  !
 'CC BY-NC-ND'													`LICENSE !
 'https://github.com/ponyatov/Ouroboros'							`GITHUB  !
@@ -39,7 +39,7 @@ PY
 	<<
 
 	section: FRAMES <<
-	section: PLY 	<<
+	section: PLY 	dup `PLY ! <<
 	section: FORTH	<<
 	section: META	<<
 	section: INIT	<<
