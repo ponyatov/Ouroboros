@@ -1,8 +1,8 @@
 \ metaL
 # metacircular implementation
 
-module: self													`MODULE  !
-'Ouroboros metacircular programming language implementation'	`TITLE   !
+module: Ouroboros												`MODULE  !
+'metacircular programming language implementation'				`TITLE   !
 'Dmitry Ponyatov <<dponyatov@gmail.com>>'						`AUTHOR  !
 'CC BY-NC-ND'													`LICENSE !
 'https://github.com/ponyatov/Ouroboros'							`GITHUB  !
@@ -43,7 +43,7 @@ PY
 	section: FORTH	<<
 	section: META	<<
 	section: INIT	<<
-?? .
+.
 
 W ??
 

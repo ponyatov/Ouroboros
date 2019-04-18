@@ -1,6 +1,6 @@
 ![logo](ouroboros.png)
-# self
-### Ouroboros metacircular programming language implementation
+# Ouroboros
+### metacircular programming language implementation
 
 (c) Dmitry Ponyatov <<dponyatov@gmail.com>> CC BY-NC-ND
 
