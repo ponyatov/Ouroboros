@@ -120,17 +120,25 @@ W << DUP
 def DROPALL(): S.dropall()
 W['.'] = CMD(DROPALL)
 
+## ( -- ) stop system
 def BYE(): sys.exit(0)
 W << BYE
 
+## ( -- ) dump stack
 def Q(): print S
 W['?'] = CMD(Q)
 
+# ( -- ) dump stack and exit (for debug in batch runs)
 def QQ(): Q() ; BYE()
 W['??'] = CMD(QQ)
 
+## ! ( obj addr -- ) W[addr] = obj
 def ST(): idx = S.pop().value ; W[idx] = S.pop()
 W['!'] = CMD(ST)
+
+## .! ( obj addr target -- ) target[addr] = obj
+def pST(): obj = S.pop() ; addr = S.pop() ; obj[addr.value] = S.pop()
+W['.!'] = CMD(pST)
 
 def PUSH(): B = S.pop() ; S.top() << B
 W['<<'] = CMD(PUSH)
@@ -173,7 +181,9 @@ W << REPL
 
 class Meta(Frame): pass
 
-class Module(Meta): pass
+class Module(Meta):
+    def src(self):
+        return 'import %s\n' % self.value
 
 def MODULE(): WORD() ; S << Module(S.pop().value)
 
@@ -192,7 +202,11 @@ W << FILE
 def SRC(): print S.pop().src()
 W['>src'] = CMD(SRC)
 
-class Section(Meta): pass
+class Section(Meta):
+    def src(self):
+        T = '#' * (len(self.value)+1 ) + ' ' + self.val1ue + '\n\n'
+        for i in self.nest: T += i.src()
+        return T
 
 def SECTION(): WORD() ; S << Section(S.pop().value)
 W['section:'] = CMD(SECTION)

@@ -45,6 +45,10 @@ PY
 	section: INIT	<<
 .
 
+module: ply.lex `AS PLY .! PY ??
+
+PY >src ??
+
 W ??
 
 any blablabla
