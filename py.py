@@ -215,6 +215,9 @@ W['section:'] = CMD(SECTION)
 ########################################################################## INIT
 
 if __name__ == '__main__':
-    for src in sys.argv[1:]:
+    files  = sys.argv[1:]
+    for src in files:
         S << String(open(src).read())
         INTERPRET()
+    if not files:
+        REPL()
