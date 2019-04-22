@@ -6,4 +6,4 @@
 
 github: https://github.com/ponyatov/Ouroboros
 
-wiki manual: https://github.com/ponyatov/Ouroboros/wiki
+  wiki: https://github.com/ponyatov/Ouroboros/wiki

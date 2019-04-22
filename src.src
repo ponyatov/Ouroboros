@@ -6,6 +6,7 @@ module: Ouroboros												`MODULE  !
 'Dmitry Ponyatov <<dponyatov@gmail.com>>'						`AUTHOR  !
 'CC BY-NC-ND'													`LICENSE !
 'https://github.com/ponyatov/Ouroboros'							`GITHUB  !
+'https://github.com/ponyatov/Ouroboros/wiki'					`WIKI	 !
 'ouroboros.png'													`LOGO	 !
 
 `README.md											   FILE dup `README  !
@@ -16,11 +17,16 @@ module: Ouroboros												`MODULE  !
 	'(c) ' AUTHOR + ' ' + LICENSE + <<
 	''								<<
 	'github: ' GITHUB +				<<
+	''								<<
+	'  wiki: ' WIKI   +				<<
 >src .
+
+??
 
 `Makefile												FILE dup `MK 	 !
 	'log.log: src.src py.py'		<<
 	'\tpython py.py $< > $@'		<<
+\		' && tail $(TAIL) $@' +		<<
 >src .
 
 `bat.bat												FILE dup `BAT	 !

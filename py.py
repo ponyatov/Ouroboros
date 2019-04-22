@@ -170,6 +170,7 @@ def INTERPRET():
         if isinstance(S.top(), Symbol):
             if not FIND(): raise SyntaxError(S.pop()) 
             EXECUTE()
+W << INTERPRET
 
 def REPL():
     while True:
@@ -217,4 +218,3 @@ if __name__ == '__main__':
     for src in sys.argv[1:]:
         S << String(open(src).read())
         INTERPRET()
-    REPL()
