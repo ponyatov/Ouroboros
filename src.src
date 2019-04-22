@@ -21,22 +21,25 @@ module: Ouroboros												`MODULE  !
 	'  wiki: ' WIKI   +				<<
 >src .
 
-??
-
 `Makefile												FILE dup `MK 	 !
 	'log.log: src.src py.py'		<<
-	'\tpython py.py $< > $@'		<<
-\		' && tail $(TAIL) $@' +		<<
->src .
-
-`bat.bat												FILE dup `BAT	 !
-	'@gvim -p log.log src.src py.py' <<
+	'\tpython py.py $< > $@'
+		' && tail $(TAIL) $@' +		<<
 >src .
 
 `log.log												FILE	 `LOG	 !
 `src.src												FILE	 `SRC	 !
-
 `py.py													FILE 	 `PY	 !
+
+`bat.bat												FILE dup `BAT	 !
+	'@gvim -p'
+		' ' + LOG +		\\ log file
+		' ' + SRC + 
+		' ' + PY + 
+	<<
+>src .
+
+W ??
 
 PY
 	section: import
